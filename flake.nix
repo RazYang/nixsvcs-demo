@@ -46,6 +46,12 @@
           hello210-musl64 = svcs.svcsCross.musl64.hello210;
           hello210-musl64-closure = svcs.svcsCross.musl64.svcClosure.hello210;
           hello210-musl64-image = svcs.svcsCross.musl64.svcImage.hello210;
+          hello210-musl64-image-interactive = nixsvcs.lib.infuse svcs.svcsCross.musl64.svcImage.hello210 {
+            __args.copyToRoot.__args.paths.__append = with pkgs.pkgsCross.musl64; [
+              toybox
+              bashInteractive
+            ];
+          };
         }
       );
     };
