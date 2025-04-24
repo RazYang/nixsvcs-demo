@@ -38,8 +38,7 @@
           hello210-image = svcs.svcImage.hello210;
           hello210-image-interactive = nixsvcs.lib.infuse svcs.svcImage.hello210 {
             __args.copyToRoot.__args.paths.__append = with pkgs; [
-              toybox
-              bashInteractive
+              busybox
             ];
           };
 
@@ -48,8 +47,7 @@
           hello210-musl64-image = svcs.svcsCross.musl64.svcImage.hello210;
           hello210-musl64-image-interactive = nixsvcs.lib.infuse svcs.svcsCross.musl64.svcImage.hello210 {
             __args.copyToRoot.__args.paths.__append = with pkgs.pkgsCross.musl64; [
-              toybox
-              bashInteractive
+              busybox
             ];
           };
         }
