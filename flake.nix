@@ -22,6 +22,7 @@
               (import ./nixpkgs-overlay.nix nixsvcs.lib.infuse)
             ];
           };
+          pkgs = import nixpkgs nixpkgsConfig;
 
           svcs = import nixsvcs {
             inherit nixpkgs nixpkgsConfig;
@@ -35,6 +36,12 @@
           hello210 = svcs.hello210;
           hello210-closure = svcs.svcClosure.hello210;
           hello210-image = svcs.svcImage.hello210;
+          hello210-image-interactive = nixsvcs.lib.infuse svcs.svcImage.hello210 {
+            __args.copyToRoot.__args.paths.__append = with pkgs; [
+              toybox
+              bashInteractive
+            ];
+          };
 
           hello210-musl64 = svcs.svcsCross.musl64.hello210;
           hello210-musl64-closure = svcs.svcsCross.musl64.svcClosure.hello210;
